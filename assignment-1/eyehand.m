@@ -1,6 +1,7 @@
 eye = im2double(imread('photos/woman.png'));
 hand = im2double(imread('photos/hand.png')); % size(imga) = size(imgb)
 hand = imresize(hand,[size(eye,1) size(eye,2)]);
+load('eyemask.mat');
 
 [M N ~] = size(eye);
 level = 5;
@@ -8,7 +9,7 @@ level = 5;
 lap1 = genPyr(eye,'lap',level); % the Laplacian pyramid
 lap2 = genPyr(hand,'lap',level);
 
-maska = createMask(roi);
+maska = eyemask;
 maskb = 1-maska;
 
 blurh = fspecial('gauss',30,15); % feather the border
